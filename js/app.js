@@ -10,8 +10,16 @@
  *   - add each card's HTML to the page
  */
 
-$('.restart').click(function() {
+let classes = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 
+$('.restart').click(function() {
+  shuffle (classes);
+  let i = 0;
+  let cards = $('.card').children();
+  cards.each(function() {
+    $(this).removeClass();
+    $(this).addClass(classes[i++]);
+  });
 });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
