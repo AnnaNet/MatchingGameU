@@ -11,8 +11,16 @@
  */
 
 let classes = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
+let cardOpen = 0, i = 0, x = 0;
+let done = [],  itsOpenNow = [];
 
-$('.restart').click(function() {
+
+function alignment() {
+  $('.card').each(function() {
+    $(this).removeClass();
+    $(this).addClass('card');
+  });
+
   shuffle (classes);
   let i = 0;
   let cards = $('.card').children();
@@ -20,12 +28,17 @@ $('.restart').click(function() {
     $(this).removeClass();
     $(this).addClass(classes[i++]);
   });
-});
+  done = [];
+  i = 0;
+  itsOpenNow = [];
+  x = 0;
+  cardOpen = 0;
+
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
-
   while (currentIndex !== 0) {
 
     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -47,8 +60,86 @@ function reverse(element) {
   }
 }
 
+function opened(cards, element) {
+  $(cards).each(function() {
+    if ($(this) == $(element)) {
+      return (false);
+    }
+  });
+  return (true);
+
+}
+
+function closeCards() {
+  let sum = 0;
+
+
+  $('.card').each(function() {
+    if ($(this).hasClass('match')) {
+      sum++;
+    }
+  });
+  if (sum == 2) {
+    $('.card').each(function() {
+      $(this).removeClass('match');
+    });
+
+  }
+  itsOpenNow = [];
+  x = 0;
+}
+
+function isConsilience(element) {
+/*  if (signOpened != 0) {*/
+    //let signOpened = $(cardOpen).children();
+    //let signNow = $(element).children();
+  /*}*/
+
+
+  if (cardOpen == 0) {
+    cardOpen = $(element);
+    itsOpenNow[x++] = $(element);
+  }
+  else {
+    let signOpened = $(cardOpen).children();
+    let signNow = $(element).children();
+
+    if ($(signOpened).attr('class') == $(signNow).attr('class')) {
+
+      $(cardOpen).removeClass('match');
+      $(element).removeClass('match');
+
+      $(cardOpen).addClass('open show');
+      $(element).addClass('open show');
+
+      done[i++] = $(cardOpen);
+      done[i++] = $(element);
+
+      signOpened = 0;
+      cardOpen = 0;
+      isOpenNow = [];
+    }
+    else {
+      signOpened = 0;
+      cardOpen = 0;
+
+    }
+  }
+
+}
+
+alignment();
+
 $('.card').click(function() {
-  reverse(this);
+  if (opened(itsOpenNow, this)) {
+    closeCards();
+    reverse(this);
+    isConsilience(this);
+  }
+});
+
+$('.restart').click(function() {
+  alignment();
 });
 
 
