@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-const elements = document.querySelectorAll('.card');
+/*const elements = document.querySelectorAll('.card');*/
 
 /*
  * Display the cards on the page
@@ -10,11 +10,8 @@ const elements = document.querySelectorAll('.card');
  *   - add each card's HTML to the page
  */
 
-const restart = document.querySelector('.restart');
-restart.addEventListener('click', function() {
-  shuffle(elements);
-  restart.style.backgroundColor = 'red';
-  console.log ("restart");
+$('.restart').click(function() {
+
 });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -22,18 +19,16 @@ function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   while (currentIndex !== 0) {
+
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
-    console.log (randomIndex);
-  }
 
+  }
   return array;
 }
-
-/*let mark = 0;*/
 
 function reverse(element) {
   if ($(element).hasClass('match')) {
@@ -44,13 +39,9 @@ function reverse(element) {
   }
 }
 
-for (const element of elements) {
-  element.addEventListener('click', function() {
-    console.log ("Click!");
-/*    let color = $(element).css('background');*/
-    reverse(element);
-  });
-}
+$('.card').click(function() {
+  reverse(this);
+});
 
 
 /*
