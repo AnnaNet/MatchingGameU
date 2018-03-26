@@ -12,7 +12,7 @@
 
 let classes = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 let cardOpen = 0, i = 0, x = 0;
-let done = [],  itsOpenNow = [];
+let itsOpenNow = [];
 
 
 function alignment() {
@@ -28,7 +28,6 @@ function alignment() {
     $(this).removeClass();
     $(this).addClass(classes[i++]);
   });
-  done = [];
   i = 0;
   itsOpenNow = [];
   x = 0;
@@ -61,17 +60,11 @@ function reverse(element) {
 }
 
 function opened(element) {
-/*  $(cards).each(function() {*/
-    //if ($(this) == $(element)) {
-      //return (false);
-    //}
-  /*});*/
   if ($(element).hasClass('open show') || $(element).hasClass('match')) {
     return (false);
   } else {
       return (true);
     }
-
   }
 
   function closeCards() {
@@ -94,12 +87,6 @@ function opened(element) {
 }
 
 function isConsilience(element) {
-/*  if (signOpened != 0) {*/
-    //let signOpened = $(cardOpen).children();
-    //let signNow = $(element).children();
-  /*}*/
-
-
   if (cardOpen == 0) {
     cardOpen = $(element);
     itsOpenNow[x++] = $(element);
@@ -115,9 +102,6 @@ function isConsilience(element) {
 
       $(cardOpen).addClass('open show');
       $(element).addClass('open show');
-
-      done[i++] = $(cardOpen);
-      done[i++] = $(element);
 
       signOpened = 0;
       cardOpen = 0;
