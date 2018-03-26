@@ -60,17 +60,21 @@ function reverse(element) {
   }
 }
 
-function opened(cards, element) {
-  $(cards).each(function() {
-    if ($(this) == $(element)) {
-      return (false);
+function opened(element) {
+/*  $(cards).each(function() {*/
+    //if ($(this) == $(element)) {
+      //return (false);
+    //}
+  /*});*/
+  if ($(element).hasClass('open show') || $(element).hasClass('match')) {
+    return (false);
+  } else {
+      return (true);
     }
-  });
-  return (true);
 
-}
+  }
 
-function closeCards() {
+  function closeCards() {
   let sum = 0;
 
 
@@ -131,7 +135,7 @@ function isConsilience(element) {
 alignment();
 
 $('.card').click(function() {
-  if (opened(itsOpenNow, this)) {
+  if (opened(this)) {
     closeCards();
     reverse(this);
     isConsilience(this);
