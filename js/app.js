@@ -11,7 +11,7 @@
  */
 
 let classes = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
-let cardOpen = 0, i = 0, x = 0;
+let cardOpen = 0, i = 0, x = 0; moves = 0;
 let itsOpenNow = [];
 
 
@@ -32,6 +32,7 @@ function alignment() {
   itsOpenNow = [];
   x = 0;
   cardOpen = 0;
+  moves = 0;
 
 }
 
@@ -67,7 +68,12 @@ function opened(element) {
     }
   }
 
-  function closeCards() {
+function calc() {
+  moves++;
+  $('.moves').text(moves);
+}
+
+function closeCards() {
   let sum = 0;
 
 
@@ -120,6 +126,7 @@ alignment();
 
 $('.card').click(function() {
   if (opened(this)) {
+    calc();
     closeCards();
     reverse(this);
     isConsilience(this);
