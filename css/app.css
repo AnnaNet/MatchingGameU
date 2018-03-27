@@ -33,6 +33,17 @@ h1 {
     font-weight: 300;
 }
 
+.colorLetter {
+  font: bold;
+}
+
+.colorLetter SPAN:nth-child(1) {color: #c70000;}
+.colorLetter SPAN:nth-child(2) {color: #0e0ea2;}
+
+.timer {
+  font-family: 'Courier new';
+}
+
 /*
  * Styles for the deck of cards
  */

@@ -12,7 +12,13 @@
 
 let classes = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 let cardOpen = 0, i = 0, x = 0; moves = 0;
+let timeSeconds = 0;
 let itsOpenNow = [];
+let timer = undefined;
+let sum = 0;
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
 
 
 function alignment() {
@@ -29,13 +35,20 @@ function alignment() {
     $(this).addClass(classes[i++]);
   });
 
+  seconds = 0;
+  minutes = 0;
+  hours = 0;
   i = 0;
   itsOpenNow = [];
   x = 0;
   cardOpen = 0;
   moves = -1;
   calc();
-
+  sum = 0;
+  timeSeconds = 0;
+  $('.time').text("00.00.00");
+  clearInterval(timer);
+  timer = undefined;
   $('.level').each(function() {
       $(this).removeClass();
       $(this).addClass('level fa fa-star');
@@ -76,34 +89,61 @@ function opened(element) {
 function calc() {
   moves++;
   $('.moves').text(moves);
-  if (moves == 3) {
+  if (moves == 30) {
     $('.level:first').removeClass('fa-star');
-  } else if (moves == 5) {
+  } else if (moves == 50) {
     $('.level:eq(1)').removeClass('fa-star');
-
   }
 }
 
-function begin() {
-  let val = setInterval(clock, 1000);
-  $('.card').each(function() {
-    if ($(this).hasClass(show)) {
-      quantity++;
-      if (quantity == 16) {
-        clear (val);
-      }
-    }
-  });
+function startTimer() {
+  if (timer === undefined) {
+    timer = setInterval(timeTick, 1000);
+  }
 }
 
-function clock() {
-  let time = 0;
-  $('.timer').text(time++);
+function timeTick() {
+  let formatHours = '';
+  let formatMinutes = '';
+  let formatSeconds = '';
+
+  timeSeconds = timeSeconds + 1;
+  console.log (timeSeconds);
+
+  if (timeSeconds > 59) {
+    seconds = timeSeconds % 60;
+    console.log (seconds);
+    minutes = (timeSeconds - seconds) / 60;
+    console.log (minutes);
+    if (minutes > 59) {
+      minutes = minutes % 60;
+      hours = (timeSeconds - minutes * 60) / 60;
+    }
+  } else {
+    seconds = timeSeconds;
+  }
+  if (hours < 10) {
+    formatHours = 0;
+  }
+  if (minutes < 10) {
+    formatMinutes = 0;
+  }
+  if (seconds < 10) {
+    formatSeconds = 0;
+  }
+  $('.time').text(`${formatHours}${hours}:${formatMinutes}${minutes}:${formatSeconds}${seconds}`);
+}
+
+function stopTimer() {
+  sum++;
+  if (sum == 8) {
+    clearInterval(timer);
+    timer = undefined;
+  }
 }
 
 function closeCards() {
   let sum = 0;
-
 
   $('.card').each(function() {
     if ($(this).hasClass('match')) {
@@ -114,8 +154,8 @@ function closeCards() {
     $('.card').each(function() {
       $(this).removeClass('match');
     });
-
   }
+
   itsOpenNow = [];
   x = 0;
 }
@@ -137,9 +177,11 @@ function isConsilience(element) {
       $(cardOpen).addClass('open show');
       $(element).addClass('open show');
 
+      stopTimer();
+
       signOpened = 0;
       cardOpen = 0;
-      isOpenNow = [];
+/*      isOpenNow = [];*/
     }
     else {
       signOpened = 0;
@@ -153,9 +195,7 @@ function isConsilience(element) {
 alignment();
 
 $('.card').click(function() {
-  if ($('.timer').text = 0) {
-    begin();
-  }
+  startTimer();
 
   if (opened(this)) {
     calc();
