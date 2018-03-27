@@ -28,12 +28,18 @@ function alignment() {
     $(this).removeClass();
     $(this).addClass(classes[i++]);
   });
+
   i = 0;
   itsOpenNow = [];
   x = 0;
   cardOpen = 0;
-  moves = 0;
+  moves = -1;
+  calc();
 
+  $('.level').each(function() {
+      $(this).removeClass();
+      $(this).addClass('level fa fa-star');
+  });
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -54,8 +60,7 @@ function shuffle(array) {
 function reverse(element) {
   if ($(element).hasClass('match')) {
     $(element).removeClass('match');
-  }
-  else {
+  } else {
     $(element).addClass('match');
   }
 }
@@ -71,6 +76,29 @@ function opened(element) {
 function calc() {
   moves++;
   $('.moves').text(moves);
+  if (moves == 3) {
+    $('.level:first').removeClass('fa-star');
+  } else if (moves == 5) {
+    $('.level:eq(1)').removeClass('fa-star');
+
+  }
+}
+
+function begin() {
+  let val = setInterval(clock, 1000);
+  $('.card').each(function() {
+    if ($(this).hasClass(show)) {
+      quantity++;
+      if (quantity == 16) {
+        clear (val);
+      }
+    }
+  });
+}
+
+function clock() {
+  let time = 0;
+  $('.timer').text(time++);
 }
 
 function closeCards() {
@@ -125,6 +153,10 @@ function isConsilience(element) {
 alignment();
 
 $('.card').click(function() {
+  if ($('.timer').text = 0) {
+    begin();
+  }
+
   if (opened(this)) {
     calc();
     closeCards();
