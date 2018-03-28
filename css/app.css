@@ -145,6 +145,23 @@ h1 {
   top: 5em;
 }
 
+.modal-header {
+  text-align: center;
+}
+
 .modal-title {
   font-size: 2em;
+}
+
+.btn {
+  text-align: right;
+}
+
+.win-data {
+  padding-right: 1.5em;
+}
+
+.goblet {
+  width: 20%;
+  height: 20%;
 }

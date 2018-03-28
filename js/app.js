@@ -19,6 +19,7 @@ let sum = 0;
 let seconds = 0;
 let minutes = 0;
 let hours = 0;
+let levelStars = 3;
 
 
 function alignment() {
@@ -35,6 +36,7 @@ function alignment() {
     $(this).addClass(classes[i++]);
   });
 
+  levelStars = 3;
   seconds = 0;
   minutes = 0;
   hours = 0;
@@ -91,8 +93,10 @@ function calc() {
   $('.moves').text(moves);
   if (moves == 30) {
     $('.level:first').removeClass('fa-star');
+    levelStars--;
   } else if (moves == 50) {
     $('.level:eq(1)').removeClass('fa-star');
+    levelStars--;
   }
 }
 
@@ -134,16 +138,36 @@ function timeTick() {
   $('.time').text(`${formatHours}${hours}:${formatMinutes}${minutes}:${formatSeconds}${seconds}`);
 }
 
+function modalContext(){
+  let starsWon = '';
+  const movesWon = moves;
+  const timeWon = $(".time").text();
+
+  switch (levelStars) {
+    case 3: starsWon = "★★★";
+      break;
+    case 2: starsWon = "★★";
+      break;
+    case 1: starsWon = "★";
+  }
+
+  $('.win-time').text(`Time of game: ${timeWon}`);
+  $('.win-moves').text(`Moves: ${movesWon}`);
+  $('.win-stars').text(`Yours STARS: ${starsWon}`);
+
+  $("#Wow").modal('show');
+}
+
 function stopTimer() {
   sum++;
-  $("#Wow").modal('show');
-
+  modalContext();
   if (sum == 8) {
     clearInterval(timer);
     timer = undefined;
     $("#Wow").modal('show');
   }
 }
+
 
 function closeCards() {
   let sum = 0;
@@ -184,7 +208,6 @@ function isConsilience(element) {
 
       signOpened = 0;
       cardOpen = 0;
-/*      isOpenNow = [];*/
     }
     else {
       signOpened = 0;
@@ -192,7 +215,6 @@ function isConsilience(element) {
 
     }
   }
-
 }
 
 alignment();
@@ -212,6 +234,9 @@ $('.restart').click(function() {
   alignment();
 });
 
+$('.play').click(function() {
+  alignment();
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:

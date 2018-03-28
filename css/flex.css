@@ -5,6 +5,10 @@
   flex-wrap: wrap;
 }
 
+.modal-body {
+  display: flex;
+}
+
 
 /*TODO: settings for screen less 660px at width*/
 @media screen and (max-width: 660px) {
@@ -18,8 +22,19 @@
     /*font-size: 1.2em;*/
   /*}*/
 }
+
+@media screen and (max-width: 500px) {
+  .win-data {
+    font-size: 1.2em;
+  }
+}
+
 @media screen and (max-width: 400px) {
   .score-panel {
     font-size: 2em;
   }
+  .win-data {
+    font-size: 1em;
+  }
+
 }
