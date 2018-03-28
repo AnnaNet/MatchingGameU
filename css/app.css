@@ -35,12 +35,14 @@ h1 {
     margin-bottom: 0;
 }
 
-.colorLetter {
+.color-letter {
   font: bold;
 }
 
-.colorLetter SPAN:nth-child(1) {color: #c70000;}
-.colorLetter SPAN:nth-child(2) {color: #0e0ea2;}
+.color-letter SPAN:nth-child(1) {color: #c70000;}
+.color-letter SPAN:nth-child(2) {color: #0e0ea2;}
+.color-letter SPAN:nth-child(3) {color: #056705;}
+.color-letter SPAN:nth-child(4) {color: #750675;}
 
 .timer {
   font-family: 'Courier new';
@@ -135,4 +137,14 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.modal-content {
+  margin: 1em;
+  padding: 1em;
+  top: 5em;
+}
+
+.modal-title {
+  font-size: 2em;
 }

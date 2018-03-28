@@ -136,9 +136,12 @@ function timeTick() {
 
 function stopTimer() {
   sum++;
+  $("#Wow").modal('show');
+
   if (sum == 8) {
     clearInterval(timer);
     timer = undefined;
+    $("#Wow").modal('show');
   }
 }
 
