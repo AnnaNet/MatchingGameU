@@ -99,7 +99,7 @@ body {
   cursor: default;
 }
 
-.deck .card.show {
+.deck .card.cardShow {
   font-size: 33px;
 }
 

@@ -99,7 +99,7 @@ function reverse(element) {
 /*@description Opens card*/
 /*@param (DOM-element) card*/
 function opened(element) {
-  if ($(element).hasClass('open show') || $(element).hasClass('match')) {
+  if ($(element).hasClass('open cardShow') || $(element).hasClass('match')) {
     return (false);
   } else {
       return (true);
@@ -228,8 +228,8 @@ function isConsilience(element) {
       $(cardOpen).removeClass('match');
       $(element).removeClass('match');
 
-      $(cardOpen).addClass('open show');
-      $(element).addClass('open show');
+      $(cardOpen).addClass('open cardShow');
+      $(element).addClass('open cardShow');
 
       stopTimer();
 
