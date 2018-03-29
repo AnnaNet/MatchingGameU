@@ -14,4 +14,4 @@ You can click on cards for searching two same cards, after - more two cards. Do 
 befor all cards will opened.
 
 ## Contributing
-If you would like to play again or begining, press sign on right.
+If you would like to play again or begining, press sign on right or letter 'n'.
