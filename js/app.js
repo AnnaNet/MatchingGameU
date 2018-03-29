@@ -1,17 +1,26 @@
-/*
- * Create a list that holds all of your cards
- */
-/*const elements = document.querySelectorAll('.card');*/
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-let classes = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
-let cardOpen = 0, i = 0, x = 0; moves = 0;
+/*TODO: add variables and array*/
+let classes = [
+  "fa fa-diamond",
+  "fa fa-paper-plane-o",
+  "fa fa-anchor",
+  "fa fa-bolt",
+  "fa fa-cube",
+  "fa fa-leaf",
+  "fa fa-bicycle",
+  "fa fa-bomb",
+  "fa fa-diamond",
+  "fa fa-paper-plane-o",
+  "fa fa-anchor",
+  "fa fa-bolt",
+  "fa fa-cube",
+  "fa fa-leaf",
+  "fa fa-bicycle",
+  "fa fa-bomb"
+];
+let cardOpen = 0;
+let  i = 0;
+let  x = 0;
+let moves = 0;
 let timeSeconds = 0;
 let itsOpenNow = [];
 let timer = undefined;
@@ -22,6 +31,7 @@ let hours = 0;
 let levelStars = 3;
 
 
+/*@description Prepares to new game*/
 function alignment() {
   $('.card').each(function() {
     $(this).removeClass();
@@ -57,7 +67,9 @@ function alignment() {
   });
 }
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+
+/*@description Shuffle function from http://stackoverflow.com/a/2450976*/
+/*@param (array) signs of cards*/
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
   while (currentIndex !== 0) {
@@ -72,6 +84,9 @@ function shuffle(array) {
   return array;
 }
 
+
+/*@description Inverts card*/
+/*@param (DOM-element) card*/
 function reverse(element) {
   if ($(element).hasClass('match')) {
     $(element).removeClass('match');
@@ -80,6 +95,9 @@ function reverse(element) {
   }
 }
 
+
+/*@description Opens card*/
+/*@param (DOM-element) card*/
 function opened(element) {
   if ($(element).hasClass('open show') || $(element).hasClass('match')) {
     return (false);
@@ -88,6 +106,8 @@ function opened(element) {
     }
   }
 
+
+/*@description Counts moves, delete stars and counts it*/
 function calc() {
   moves++;
   $('.moves').text(moves);
@@ -100,25 +120,26 @@ function calc() {
   }
 }
 
+
+/*@description Set Interval (1 second)*/
 function startTimer() {
   if (timer === undefined) {
     timer = setInterval(timeTick, 1000);
   }
 }
 
+
+/*@description Counts, formats and show time*/
 function timeTick() {
   let formatHours = '';
   let formatMinutes = '';
   let formatSeconds = '';
 
   timeSeconds = timeSeconds + 1;
-  console.log (timeSeconds);
 
   if (timeSeconds > 59) {
     seconds = timeSeconds % 60;
-    console.log (seconds);
     minutes = (timeSeconds - seconds) / 60;
-    console.log (minutes);
     if (minutes > 59) {
       minutes = minutes % 60;
       hours = (timeSeconds - minutes * 60) / 60;
@@ -138,6 +159,8 @@ function timeTick() {
   $('.time').text(`${formatHours}${hours}:${formatMinutes}${minutes}:${formatSeconds}${seconds}`);
 }
 
+
+/*@description Prepares data for modal window (when will win)*/
 function modalContext(){
   let starsWon = '';
   const movesWon = moves;
@@ -158,17 +181,19 @@ function modalContext(){
   $("#Wow").modal('show');
 }
 
+
+/*@description Stops timer*/
 function stopTimer() {
   sum++;
-  modalContext();
   if (sum == 8) {
     clearInterval(timer);
     timer = undefined;
-    $("#Wow").modal('show');
+    modalContext();
   }
 }
 
 
+/*@description Closes different cards*/
 function closeCards() {
   let sum = 0;
 
@@ -187,12 +212,14 @@ function closeCards() {
   x = 0;
 }
 
+
+/*@description Compares cards and does states "checked"*/
+/*@param (DOM-element) card*/
 function isConsilience(element) {
   if (cardOpen == 0) {
     cardOpen = $(element);
     itsOpenNow[x++] = $(element);
-  }
-  else {
+  } else {
     let signOpened = $(cardOpen).children();
     let signNow = $(element).children();
 
@@ -208,8 +235,7 @@ function isConsilience(element) {
 
       signOpened = 0;
       cardOpen = 0;
-    }
-    else {
+    } else {
       signOpened = 0;
       cardOpen = 0;
 
@@ -217,8 +243,12 @@ function isConsilience(element) {
   }
 }
 
+
+/*TODO: prepares to new game*/
 alignment();
 
+
+/*TODO: when click on card, checks it*/
 $('.card').click(function() {
   startTimer();
 
@@ -230,21 +260,14 @@ $('.card').click(function() {
   }
 });
 
+
+/*TODO: when click on sign "restart", prepares to new game*/
 $('.restart').click(function() {
   alignment();
 });
 
+
+/*TODO: when click on button "play" in scores window, prepares to new game*/
 $('.play').click(function() {
   alignment();
 });
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */

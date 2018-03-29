@@ -1,38 +1,41 @@
+/*Common*/
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
-*::before,
-*::after {
+  *::before,
+  *::after {
     box-sizing: inherit;
 }
 
-html,
+html
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+  background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+  font-family: 'Coda', cursive;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 0;
+
+/*Styles for the header*/
+.title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 0;
 }
 
 .color-letter {
@@ -44,6 +47,8 @@ h1 {
 .color-letter SPAN:nth-child(3) {color: #056705;}
 .color-letter SPAN:nth-child(4) {color: #750675;}
 
+
+/*Styles for the timer*/
 .timer {
   font-family: 'Courier new';
   text-align: center;
@@ -53,92 +58,91 @@ h1 {
 .time {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-
 }
 
-/*
- * Styles for the deck of cards
- */
 
+/*Styles for the deck and cards*/
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 3em;
-    margin-right: auto;
-    margin-left: auto;
+  width: 660px;
+  min-height: 680px;
+  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 3em;
+  margin-right: auto;
+  margin-left: auto;
 
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
-    background: #2e3d49;
-    font-size: 0;
-    color: #ffffff;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  height: 125px;
+  width: 125px;
+  background: #2e3d49;
+  font-size: 0;
+  color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
 .deck .card.open {
-    transform: rotateY(0);
-    background: #02b3e4;
-    cursor: default;
+  transform: rotateY(0);
+  background: #02b3e4;
+  cursor: default;
 }
 
 .deck .card.show {
-    font-size: 33px;
+  font-size: 33px;
 }
 
 .deck .card.match {
-    cursor: default;
-    background: #02ccba;
-    font-size: 33px;
+  cursor: default;
+  background: #02ccba;
+  font-size: 33px;
 }
 
-/*
- * Styles for the Score Panel
- */
 
+/*Styles for the Score Panel*/
 .score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    width: 660px;
-    padding: 0 2em 0 2em;
-
+  text-align: left;
+  width: 345px;
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 660px;
+  padding: 0 2em 0 2em;
 }
 
-.score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
+.score-panel
+.stars {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
-    list-style: none;
-    display: inline-block;
+.score-panel
+.stars li {
+  list-style: none;
+  display: inline-block;
 }
 
-.score-panel .restart {
-    float: right;
-    cursor: pointer;
+.score-panel
+.restart {
+  float: right;
+  cursor: pointer;
 }
 
+
+/*Styles for the modal window*/
 .modal-content {
   margin: 1em;
   padding: 1em;
