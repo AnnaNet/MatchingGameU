@@ -1,5 +1,6 @@
 /*TODO: preparation for use flexible blocks*/
-.container {
+.container
+.container2 {
   display: flex;
   flex-wrap: wrap;
 }
