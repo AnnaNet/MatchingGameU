@@ -1,4 +1,4 @@
-/*TODO: add variables and array*/
+/*TODO: add variables and arrays*/
 let classes = [
   "fa fa-diamond",
   "fa fa-paper-plane-o",
@@ -62,8 +62,8 @@ function alignment() {
   clearInterval(timer);
   timer = undefined;
   $('.level').each(function() {
-      $(this).removeClass();
-      $(this).addClass('level fa fa-star');
+    $(this).removeClass();
+    $(this).addClass('level fa fa-star');
   });
 }
 
@@ -102,9 +102,9 @@ function opened(element) {
   if ($(element).hasClass('open cardShow') || $(element).hasClass('match')) {
     return (false);
   } else {
-      return (true);
-    }
+    return (true);
   }
+}
 
 
 /*@description Counts moves, delete stars and counts it*/
@@ -238,7 +238,6 @@ function isConsilience(element) {
     } else {
       signOpened = 0;
       cardOpen = 0;
-
     }
   }
 }
@@ -269,5 +268,11 @@ $('.restart').click(function() {
 
 /*TODO: when click on button "play" in scores window, prepares to new game*/
 $('.play').click(function() {
+  alignment();
+});
+
+
+/*TODO: when press 'n', restart game*/
+$(document).bind('keydown', 'n', function() {
   alignment();
 });
