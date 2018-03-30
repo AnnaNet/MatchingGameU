@@ -1,5 +1,5 @@
 /*TODO: add variables and arrays*/
-let classes = [
+const classes = [
   "fa fa-diamond",
   "fa fa-paper-plane-o",
   "fa fa-anchor",
@@ -17,12 +17,11 @@ let classes = [
   "fa fa-bicycle",
   "fa fa-bomb"
 ];
+
 let cardOpen = 0;
 let  i = 0;
-let  x = 0;
 let moves = 0;
 let timeSeconds = 0;
-let itsOpenNow = [];
 let timer = undefined;
 let sum = 0;
 let seconds = 0;
@@ -39,7 +38,6 @@ function alignment() {
   });
 
   shuffle (classes);
-  let i = 0;
   let cards = $('.card').children();
   cards.each(function() {
     $(this).removeClass();
@@ -51,11 +49,8 @@ function alignment() {
   minutes = 0;
   hours = 0;
   i = 0;
-  itsOpenNow = [];
-  x = 0;
   cardOpen = 0;
-  moves = -1;
-  calc();
+  moves = 0;
   sum = 0;
   timeSeconds = 0;
   $('.time').text("00.00.00");
@@ -65,6 +60,7 @@ function alignment() {
     $(this).removeClass();
     $(this).addClass('level fa fa-star');
   });
+  $('.moves').text(moves);
 }
 
 
@@ -107,14 +103,18 @@ function opened(element) {
 }
 
 
-/*@description Counts moves, delete stars and counts it*/
+/*@description Counts moves*/
 function calc() {
-  moves++;
-  $('.moves').text(moves);
-  if (moves == 30) {
+  $('.moves').text(++moves);
+}
+
+
+/*@descriotion Couts stars and delete it*/
+function starCount() {
+  if (moves === 15) {
     $('.level:first').removeClass('fa-star');
     levelStars--;
-  } else if (moves == 50) {
+  } else if (moves === 25) {
     $('.level:eq(1)').removeClass('fa-star');
     levelStars--;
   }
@@ -162,9 +162,9 @@ function timeTick() {
 
 /*@description Prepares data for modal window (when will win)*/
 function modalContext(){
-  let starsWon = '';
   const movesWon = moves;
   const timeWon = $(".time").text();
+  let starsWon = '';
 
   switch (levelStars) {
     case 3: starsWon = "★★★";
@@ -185,45 +185,40 @@ function modalContext(){
 /*@description Stops timer*/
 function stopTimer() {
   sum++;
-  if (sum == 8) {
+  if (sum === 8) {
     clearInterval(timer);
     timer = undefined;
-    modalContext();
   }
 }
 
 
 /*@description Closes different cards*/
 function closeCards() {
-  let sum = 0;
+  let sumDifferent = 0;
 
   $('.card').each(function() {
     if ($(this).hasClass('match')) {
-      sum++;
+      sumDifferent++;
     }
   });
-  if (sum == 2) {
+  if (sumDifferent === 2) {
     $('.card').each(function() {
       $(this).removeClass('match');
     });
   }
-
-  itsOpenNow = [];
-  x = 0;
 }
 
 
 /*@description Compares cards and does states "checked"*/
 /*@param (DOM-element) card*/
 function isConsilience(element) {
-  if (cardOpen == 0) {
+  if (cardOpen === 0) {
     cardOpen = $(element);
-    itsOpenNow[x++] = $(element);
   } else {
     let signOpened = $(cardOpen).children();
     let signNow = $(element).children();
 
-    if ($(signOpened).attr('class') == $(signNow).attr('class')) {
+    if ($(signOpened).attr('class') === $(signNow).attr('class')) {
 
       $(cardOpen).removeClass('match');
       $(element).removeClass('match');
@@ -232,13 +227,17 @@ function isConsilience(element) {
       $(element).addClass('open cardShow');
 
       stopTimer();
-
-      signOpened = 0;
-      cardOpen = 0;
-    } else {
-      signOpened = 0;
-      cardOpen = 0;
     }
+
+    calc();
+    starCount();
+
+    if (sum === 8) {
+      modalContext();
+    }
+
+    signOpened = 0;
+    cardOpen = 0;
   }
 }
 
@@ -252,7 +251,6 @@ $('.card').click(function() {
   startTimer();
 
   if (opened(this)) {
-    calc();
     closeCards();
     reverse(this);
     isConsilience(this);
